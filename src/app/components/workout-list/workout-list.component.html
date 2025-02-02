@@ -1,0 +1,42 @@
+<div class="card mt-8">
+    <h2 class="text-2xl font-bold mb-6 text-accent">Workout List</h2>
+    <div class="space-y-6">
+        <div class="flex gap-4">
+        <input [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search Users..." class="input-field flex-1">
+        <input [(ngModel)]="workoutTypeFilter" (input)="onFilter()" placeholder="Filter by workout type..." class="input-field flex-1">
+        </div>
+
+        <div class="overflow-x-auto rounded-lg border border-slate-700">
+        <table class="w-full">
+            <thead class="bg-slate-800">
+                <tr>
+                    <th class="px-6 py-4 text-left font-semibold text-accent">User</th>
+                    <th class="px-6 py-4 text-left font-semibold text-accent">Activities</th>
+                    <th class="px-6 py-4 text-left font-semibold text-accent">Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of paginatedUsers" class="border-t border-slate-700 hover:bg-slate-750 transition-colors">
+                <td class="px-6 py-4 font-medium">{{user.name}}</td>
+                <td class="px-6 py-4">
+                    
+                        <div *ngFor="let workout of user.workouts" class="badge bg-slate-700 text-accent border border-slate-600 mr-2 mb-2">{{workout.type}}</div>
+                    
+                </td>
+                <td class="px-6 py-4">
+                    
+                        <div *ngFor="let workout of user.workouts" class="text-purple-400 font-mono">{{workout.minutes}}</div>
+                    
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <div class="flex justify-between items-center text-slate-400">
+            <button (click)="changePage(currentPage - 1)" [disabled]="currentPage == 1" class="btn-primary px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+            <span>Page {{currentPage}} of {{totalPages}}</span>
+            <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="btn-primary px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
+        </div>
+    </div>
+</div>

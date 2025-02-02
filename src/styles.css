@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+   @apply bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen text-slate-100;
+}
+
+.card{
+    @apply bg-slate-800 rounded-xl p-6 shadow-lg ring-1 ring-slate-700/10 transition-all duration-300 hover:ring-accent;
+}
+
+.input-field{
+    @apply bg-slate-700 rounded-lg px-4 py-3 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-200;
+}
+
+.btn-primary{
+    @apply bg-gradient-to-r from-indigo-50 to-purple-500 text-white px-6 py-3 rounded-lg font-medium hover:from-indigo-600 hover:to-purple-600 transition-all duration-200 transform;
+}

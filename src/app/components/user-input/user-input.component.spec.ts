@@ -58,4 +58,27 @@ describe('UserInputComponent', () => {
   expect(component.addUser.emit).toHaveBeenCalledWith(expectedUser);
  });
 
+ it('should not emit user when form data is invalid', () => {
+  spyOn(component.addUser, 'emit');
+  const testData = {
+    name: 'Test User',
+    type: 'Cycling',
+    minutes: -10
+  };
+
+  component.userName = testData.name;
+  component.workoutType = testData.type;
+  component.workoutMinutes = testData.minutes;
+  fixture.detectChanges();
+
+  const form = fixture.nativeElement.querySelector('form');
+  form.dispatchEvent(new Event('submit'));
+
+
+  expect(component.addUser.emit).not.toHaveBeenCalled();
+});
+
+
+
+
 });

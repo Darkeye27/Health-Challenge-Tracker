@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { User , Workout } from '../../Models/user.model';
 import { FormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
+
 
 @Component({
   selector: 'app-user-input',
   imports: [FormsModule],
   templateUrl: './user-input.component.html',
-  styleUrl: './user-input.component.css'
+  styleUrl: './user-input.component.css',
+  standalone: true,
 })
 export class UserInputComponent {
   userName: string = '';

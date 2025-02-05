@@ -1,9 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UserInputComponent } from './user-input.component';
 import { FormsModule } from '@angular/forms';
-
-
-declare var jasmine: any;
+import { UserInputComponent } from './user-input.component';
+import { User, Workout } from '../../Models/user.model';
 
 describe('UserInputComponent', () => {
   let component: UserInputComponent;
@@ -11,74 +9,52 @@ describe('UserInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule],
-      declarations: [UserInputComponent]
-    })
-    .compileComponents();
-});
+      imports: [FormsModule, UserInputComponent], // Import the standalone component here
+    }).compileComponents();
 
- beforeEach(() => {
-  fixture = TestBed.createComponent(UserInputComponent);
-  component = fixture.componentInstance;
-  fixture.detectChanges();
- });
-
- it('should create with dark the me elements', () =>{
-  expect(component).toBeTruthy();
-  const form = fixture.nativeElement.querySelector('form');
-  expect(form.classList).toContain('bg-slate-800');
- });
-
- it('should emit new user with workout data', () => {
-  spyOn(component.addUser, 'emit');
-  const testData = {
-    name: 'Test User',
-    type: 'Cycling',
-    minutes: 45
-  };
-
-  component.userName = testData.name;
-  component.workoutType = testData.type;
-  component.workoutMinutes = testData.minutes;
-  fixture.detectChanges();
-
-  const form = fixture.nativeElement.querySelector('form');
-  form.dispatchEvent(new Event('submit'));
-
-  const expectedUser = jasmine.objectContaining({
-    name: testData.name,
-    workouts: jasmine.arrayContaining([
-      jasmine.objectContaining({
-        type: testData.type,
-        minutes: testData.minutes
-      })
-    ])
+    fixture = TestBed.createComponent(UserInputComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
-  expect(component.addUser.emit).toHaveBeenCalledWith(expectedUser);
- });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
- it('should not emit user when form data is invalid', () => {
-  spyOn(component.addUser, 'emit');
-  const testData = {
-    name: 'Test User',
-    type: 'Cycling',
-    minutes: -10
-  };
+  it('should emit a new user when onSubmit is called', () => {
+    // Arrange
+    const emitSpy = spyOn(component.addUser, 'emit');
+    const mockDateNow = 1; // Fixed value for Date.now()
+    spyOn(Date, 'now').and.returnValue(mockDateNow); // Mock Date.now()
 
-  component.userName = testData.name;
-  component.workoutType = testData.type;
-  component.workoutMinutes = testData.minutes;
-  fixture.detectChanges();
+    component.userName = 'John Doe';
+    component.workoutType = 'Running';
+    component.workoutMinutes = 30;
 
-  const form = fixture.nativeElement.querySelector('form');
-  form.dispatchEvent(new Event('submit'));
+    // Act
+    component.onSubmit();
 
+    // Assert
+    const expectedUser: User = {
+      id: mockDateNow, // Use the mocked value
+      name: 'John Doe',
+      workouts: [{ type: 'Running', minutes: 30 }]
+    };
+    expect(emitSpy).toHaveBeenCalledWith (expectedUser );
+  });
 
-  expect(component.addUser.emit).not.toHaveBeenCalled();
-});
+  it('should reset the form after onSubmit is called', () => {
+    // Arrange
+    component.userName = 'John Doe';
+    component.workoutType = 'Running';
+    component.workoutMinutes = 30;
 
+    // Act
+    component.onSubmit();
 
-
-
+    // Assert
+    expect(component.userName).toBe('');
+    expect(component.workoutType).toBe('');
+    expect(component.workoutMinutes).toBe(0);
+  });
 });

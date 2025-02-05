@@ -1,59 +1,96 @@
-# Myapp
+# Workout Tracker SPA
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.4.
+This is a **single-page application (SPA)** built with **Angular** that allows users to log their workouts. It includes features such as **search, filtering, pagination**, and **data persistence using localStorage**.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **Add Users and Workouts**: Users can input their name, workout type, and duration (in minutes).
+- **Display Workout List**: The user workout data is displayed in a structured table grid.
+- **Search by Name**: Users can search for a specific user by their name.
+- **Filter by Workout Type**: Users can filter the workout list based on the type of workout.
+- **Pagination**: The list supports pagination for better usability when more than 5 users exist.
+- **Data Persistence**: The workout data is stored in `localStorage`, ensuring that it remains available even after refreshing the page.
+- **Optional Feature**: Users can track their workout progress using charts.
 
-```bash
-ng serve
-```
+## Technologies Used
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Angular** (Frontend framework)
+- **TailwindCSS** (Styling)
+- **localStorage** (For data persistence)
+- **Jasmine/Karma** (For unit testing)
 
-## Code scaffolding
+## Setup & Installation
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. Clone the repository:
+   ```sh
+   git clone <repository-url>
+   cd <repository-folder>
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Run the application:
+   ```sh
+   ng serve
+   ```
+4. Open the browser and go to `http://localhost:4200/`.
 
-```bash
-ng generate component component-name
-```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```bash
-ng generate --help
-```
+## Unit Testing
 
-## Building
+This project includes **unit tests** for:
+1. **A Component (`WorkoutListComponent`)**
+2. **A Service (`WorkoutService`)**
 
-To build the project run:
+### Run Unit Tests
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
+```sh
 ng test
 ```
 
-## Running end-to-end tests
+# Code Coverage
+### Code Coverage Summary
 
-For end-to-end (e2e) testing, run:
+## Overall Coverage
 
-```bash
-ng e2e
+- **Statements**: 61.22% (30/49)
+- **Branches**: 40% (2/5)
+- **Functions**: 38.88% (7/18)
+- **Lines**: 65.9% (29/44)
+
+## Per Component
+
+### app
+- **Statements**: 100% (7/7)
+- **Functions**: 100% (2/2)
+- **Branches**: 100% (2/2)
+- **Lines**: 100% (6/6)
+
+### app/components/user-input
+- **Statements**: 45.45% (5/11)
+- **Functions**: 0% (0/2)
+- **Lines**: 45.45% (5/11)
+
+### app/components/workout-chart
+- **Statements**: 66.66% (6/9)
+- **Functions**: 40% (2/5)
+- **Lines**: 75% (6/8)
+
+### app/components/workout-list
+- **Statements**: 54.54% (12/22)
+- **Functions**: 33.33% (3/9)
+- **Branches**: 0% (0/3)
+- **Lines**: 63.15% (12/19)
+
+
+```sh
+ng test --code-coverage
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+The **code coverage report** will be generated in the `coverage/` folder. Open `index.html` inside this folder to view detailed reports.
 
-## Additional Resources
+## License
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This project is for **educational purposes** and is **open-source**. Feel free to modify and improve it!

@@ -9,7 +9,7 @@ describe('WorkoutListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule, WorkoutListComponent] // Import the standalone component
+      imports: [FormsModule, WorkoutListComponent] 
     }).compileComponents();
 
     fixture = TestBed.createComponent(WorkoutListComponent);
@@ -17,7 +17,7 @@ describe('WorkoutListComponent', () => {
   });
 
   beforeEach(() => {
-    // Set up initial input data
+   
     component.users = [
       {
         id: 1,
@@ -44,7 +44,7 @@ describe('WorkoutListComponent', () => {
         ]
       }
     ];
-    component.ngOnInit(); // Call ngOnInit to initialize filteredUsers
+    component.ngOnInit(); 
   });
 
   it('should create the component', () => {
@@ -68,36 +68,36 @@ describe('WorkoutListComponent', () => {
     component.workoutTypeFilter = 'Running';
     component.onFilter();
 
-    expect(component.filteredUsers.length).toBe(2); // John Doe and Jane Smith have Running workouts
+    expect(component.filteredUsers.length).toBe(2); 
   });
 
   it('should paginate users correctly', () => {
-    component.itemsPerPage = 2; // Set items per page to 2
-    component.currentPage = 1; // Set current page to 1
+    component.itemsPerPage = 2; 
+    component.currentPage = 1; 
 
     const paginatedUsers = component.paginatedUsers;
 
-    expect(paginatedUsers.length).toBe(2); // Should return 2 users
+    expect(paginatedUsers.length).toBe(2); 
     expect(paginatedUsers[0].name).toBe('John Doe');
     expect(paginatedUsers[1].name).toBe('Jane Smith');
   });
 
   it('should change page correctly', () => {
-    component.itemsPerPage = 2; // Set items per page to 2
-    component.currentPage = 1; // Set current page to 1
+    component.itemsPerPage = 2; 
+    component.currentPage = 1; 
 
-    component.changePage(2); // Change to page 2
-    expect(component.currentPage).toBe(2); // Expect currentPage to be 2
+    component.changePage(2); 
+    expect(component.currentPage).toBe(2); 
 
-    component.changePage(3); // Attempt to change to page 3 (out of bounds)
-    expect(component.currentPage).toBe(2); // Should remain on page 2
+    component.changePage(3); 
+    expect(component.currentPage).toBe(2); 
 
-    component.changePage(1); // Change back to page 1
-    expect(component.currentPage).toBe(1); // Expect currentPage to be 1
+    component.changePage(1); 
+    expect(component.currentPage).toBe(1); 
   });
 
   it('should calculate total pages correctly', () => {
-    component.itemsPerPage = 2; // Change items per page to 2
-    expect(component.totalPages).toBe(2); // 3 users, 2 items per page
+    component.itemsPerPage = 2; 
+    expect(component.totalPages).toBe(2); 
   });
 });

@@ -9,7 +9,7 @@ describe('UserInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule, UserInputComponent], // Import the standalone component here
+      imports: [FormsModule, UserInputComponent], 
     }).compileComponents();
 
     fixture = TestBed.createComponent(UserInputComponent);
@@ -22,21 +22,20 @@ describe('UserInputComponent', () => {
   });
 
   it('should emit a new user when onSubmit is called', () => {
-    // Arrange
+   
     const emitSpy = spyOn(component.addUser, 'emit');
-    const mockDateNow = 1; // Fixed value for Date.now()
-    spyOn(Date, 'now').and.returnValue(mockDateNow); // Mock Date.now()
+    const mockDateNow = 1; 
+    spyOn(Date, 'now').and.returnValue(mockDateNow); 
 
     component.userName = 'John Doe';
     component.workoutType = 'Running';
     component.workoutMinutes = 30;
 
-    // Act
+    
     component.onSubmit();
 
-    // Assert
     const expectedUser: User = {
-      id: mockDateNow, // Use the mocked value
+      id: mockDateNow, 
       name: 'John Doe',
       workouts: [{ type: 'Running', minutes: 30 }]
     };
@@ -44,15 +43,13 @@ describe('UserInputComponent', () => {
   });
 
   it('should reset the form after onSubmit is called', () => {
-    // Arrange
+ 
     component.userName = 'John Doe';
     component.workoutType = 'Running';
     component.workoutMinutes = 30;
 
-    // Act
     component.onSubmit();
 
-    // Assert
     expect(component.userName).toBe('');
     expect(component.workoutType).toBe('');
     expect(component.workoutMinutes).toBe(0);
